@@ -20,4 +20,8 @@ public class Application {
     public static Integer div(Integer a, Integer b) {
         return a / b;
     }
+      
+    public static Integer substr(Integer a, Integer b) {
+        return a - b;
+    }
 }
