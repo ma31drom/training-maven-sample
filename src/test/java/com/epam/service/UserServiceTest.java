@@ -1,5 +1,7 @@
-package com.epam;
+package com.epam.service;
 
+import com.epam.model.User;
+import com.epam.repo.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -7,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 import static org.mockito.Mockito.*;
 
@@ -39,6 +41,8 @@ public class UserServiceTest {
         //THEN
         Assertions.assertEquals(source, user);
         verify(repoMock, times(1)).getById(any());
+
+
     }
 
     @Test
@@ -48,7 +52,7 @@ public class UserServiceTest {
         when(repoMock.getAll()).thenReturn(Arrays.asList(source));
 
         //WHEN
-        List<User> users = underTest.getUsers();
+        Collection<User> users = underTest.getUsers();
 
         //THEN
         Assertions.assertEquals(Arrays.asList(source), users);
