@@ -1,10 +1,12 @@
 package com.epam.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private Integer id;
     private String firstName;
-    private String LastName;
+    private String lastName;
 
     public Integer getId() {
         return id;
@@ -23,11 +25,11 @@ public class User {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class User {
         return "User[" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", LastName='" + LastName + '\'' +
+                ", LastName='" + lastName + '\'' +
                 ']';
     }
 }

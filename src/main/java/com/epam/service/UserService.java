@@ -1,9 +1,13 @@
 package com.epam.service;
 
+import com.epam.exception.UserException;
+import com.epam.exception.UserNotFoundException;
 import com.epam.model.User;
 import com.epam.repo.UserRepository;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import static org.slf4j.LoggerFactory.getLogger;
+
 
 import java.util.Collection;
 
@@ -11,19 +15,26 @@ public class UserService {
 
     private UserRepository repo;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+    private static final Logger LOGGER = getLogger(UserService.class);
 
     public UserService(UserRepository repo) {
+        repo.getRepoType();
         this.repo = repo;
     }
 
-    public User getUser(Integer id) {
-
+    public User getUser(Integer id) throws UserException {
+        User user;
         LOGGER.debug("SERVICE: User with id {} getOperation", id);
-        User user = repo.getById(id);
+
+        if (Math.random() * 100 < 50) { //DB died
+            user = repo.getById(id);
+        } else {
+            throw new UserException();
+        }
+
         if (user == null) {
             LOGGER.warn("SERVICE: User with id {} not found", id);
-            return user;
+            throw new UserNotFoundException(id);
         }
         LOGGER.info("SERVICE: User with id {} retrieved value {}", id, user);
         return user;

@@ -12,4 +12,8 @@ public interface UserRepository {
 
     void save(User user);
 
+    default String getRepoType() {
+        getAll();
+        return "NO_TYPE";
+    }
 }

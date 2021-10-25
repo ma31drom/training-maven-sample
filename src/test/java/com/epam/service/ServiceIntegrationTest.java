@@ -1,5 +1,6 @@
 package com.epam.service;
 
+import com.epam.exception.UserException;
 import com.epam.model.User;
 import com.epam.repo.ListBasedUserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class ServiceIntegrationTest {
 
     @Test
-    public void testSaveGetUser() {
+    public void testSaveGetUser() throws UserException {
 
         //GIVEN
         ListBasedUserRepository repo = new ListBasedUserRepository();

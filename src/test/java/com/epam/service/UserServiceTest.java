@@ -1,5 +1,7 @@
 package com.epam.service;
 
+import com.epam.exception.UserException;
+import com.epam.exception.UserNotFoundException;
 import com.epam.model.User;
 import com.epam.repo.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -30,7 +32,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUserGetById() {
+    public void testUserGetById() throws UserException {
         //GIVEN
         User source = new User();
         when(repoMock.getById(eq(1))).thenReturn(source);
@@ -75,5 +77,55 @@ public class UserServiceTest {
         Assertions.assertEquals(source, captor.getValue());
     }
 
+    @Test
+    public void testUserGetByIdUserNotFound() {
+        //GIVEN
+        User source = new User();
+        when(repoMock.getById(eq(1))).thenReturn(source);
 
+        //WHEN
+        //User user = underTest.getUser(1);
+
+        //THEN
+        Assertions.assertThrows(UserNotFoundException.class, () -> underTest.getUser(2));
+        //Assertions.assertEquals(source, user);
+        verify(repoMock, times(1)).getById(any());
+
+
+    }
+
+    @Test
+    public void testUserGetByIdWithRetry() {
+        //GIVEN
+        User source = new User();
+        when(repoMock.getById(eq(1))).thenReturn(source);
+        RetriableUserService underTestRetry = new RetriableUserService(underTest);
+        //WHEN
+        //User user = underTest.getUser(1);
+
+        //THEN
+        Assertions.assertThrows(UserNotFoundException.class, () -> underTestRetry.getUser(2));
+        //Assertions.assertEquals(source, user);
+        verify(repoMock, times(1)).getById(any());
+
+
+    }
+
+    @Test
+    public void testUserGetByIdWithRetry2() throws UserException {
+        //GIVEN
+        User source = new User();
+        when(repoMock.getById(eq(1))).thenReturn(source);
+        RetriableUserService underTestRetry = new RetriableUserService(underTest);
+        //WHEN
+
+
+        //THEN
+        for (int i = 0; i < 50; i++) {
+            underTestRetry.getUser(1);
+        }
+        //Assertions.assertEquals(source, user);
+        verify(repoMock, times(50)).getById(any());
+
+    }
 }

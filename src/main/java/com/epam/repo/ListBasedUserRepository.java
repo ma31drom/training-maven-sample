@@ -4,9 +4,10 @@ import com.epam.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Closeable;
 import java.util.*;
 
-public class ListBasedUserRepository implements UserRepository {
+public class ListBasedUserRepository implements UserRepository, Closeable, AutoCloseable {
 
     private Map<Integer, User> users = new HashMap<>();
 
@@ -32,5 +33,10 @@ public class ListBasedUserRepository implements UserRepository {
     @Override
     public void save(User user) {
         users.put(user.getId(), user);
+    }
+
+    @Override
+    public void close() {
+        System.out.println("close called for repo");
     }
 }
