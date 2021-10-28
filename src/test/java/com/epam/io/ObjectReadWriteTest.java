@@ -58,7 +58,7 @@ public class ObjectReadWriteTest {
         profile.setId(1);
         profile.setNickname("ma31drom");
         profile.setDescripion("Some description here");
-        
+
         try (FileWriter os = new FileWriter(file)) {
             ObjectMapper objectMapper = new ObjectMapper();
             String p = objectMapper.writeValueAsString(profile);
