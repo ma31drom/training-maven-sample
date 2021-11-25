@@ -10,7 +10,9 @@ public interface UserRepository {
 
     Collection<User> getAll();
 
-    void save(User user);
+    User save(User user);
+
+    void removeAll();
 
     default String getRepoType() {
         getAll();

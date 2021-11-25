@@ -1,6 +1,6 @@
 package com.epam.exception;
 
-public class UserException extends Exception {
+public class UserException extends RuntimeException {
 
     public UserException() {
     }

@@ -31,8 +31,14 @@ public class ListBasedUserRepository implements UserRepository, Closeable, AutoC
     }
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         users.put(user.getId(), user);
+        return user;
+    }
+
+    @Override
+    public void removeAll() {
+        users.clear();
     }
 
     @Override
