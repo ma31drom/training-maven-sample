@@ -45,4 +45,10 @@ public class ListBasedUserRepository implements UserRepository, Closeable, AutoC
     public void close() {
         System.out.println("close called for repo");
     }
+
+	@Override
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
 }

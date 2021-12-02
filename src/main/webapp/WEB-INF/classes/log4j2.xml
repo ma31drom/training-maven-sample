@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+        </Console>
+        <File name="file" fileName="app.log">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.epam.repo" level="debug" additivity="false">
+            <AppenderRef ref="file"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="file"/>
+        </Root>
+    </Loggers>
+</Configuration>

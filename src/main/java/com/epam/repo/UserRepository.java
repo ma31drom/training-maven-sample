@@ -12,6 +12,8 @@ public interface UserRepository {
 
     User save(User user);
 
+    void delete(Integer id);
+    
     void removeAll();
 
     default String getRepoType() {
